@@ -17,11 +17,6 @@ from pocket import Pocket
 
 from managers.redisAccountManager import RedisAccountManager
 
-API_TOKEN = ""
-ACCOUNTS = {}
-#CLIENT_URL = 'http://5dac3c14.ngrok.com'
-CLIENT_URL = 'http://415a13ef.ngrok.com'
-
 app = Flask(__name__)
 accounts = RedisAccountManager()
 
@@ -114,10 +109,12 @@ def send_read_link(username, uid, api_token):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Launch the Kenobi backend server")
     parser.add_argument('-c', '--consumer-key', help='the Kenobi pocket cons key', required=True)
-    parser.add_argument('-k', '--api-key', help='the Yo api key')
+    parser.add_argument('-k', '--api-key', help='the Yo api key', required=True)
+    parser.add_argument('-f', '--front_url', help='the kenobi-probe frontend url', required=True)
     args = parser.parse_args(sys.argv[1:])
 
     CONSUMER_KEY = args.consumer_key
     API_TOKEN = args.api_key
+    CLIENT_URL = args.front_url
 
-    app.run(debug=True)
+    app.run(debug=False)
