@@ -9,7 +9,7 @@ class RedisAccountManager(AccountManager):
         self.r_server = redis.Redis('localhost')
         
     def get_uid(self, username):
-        """ Gets uid of a given username, if no uid exists it gets created """
+        """ Gets uid of a given username, if no uid exists returns None"""
         uid = self.r_server.get(username)
         if uid is None:
             return None
